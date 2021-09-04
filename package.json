@@ -1,0 +1,25 @@
+{
+  "name": "drum-kit",
+  "version": "1.0.0",
+  "description": "A browser window that plays drum sounds when keys are pressed.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-server": "^13.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Windowmac/drum-kit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Windowmac/drum-kit/issues"
+  },
+  "homepage": "https://github.com/Windowmac/drum-kit#readme"
+}
