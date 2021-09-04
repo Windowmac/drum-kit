@@ -1,5 +1,4 @@
 const AudioContext = window.AudioContext || window.webkitAudioContext;
-
 let audioCtx;
 
 const init = () => {
@@ -21,30 +20,33 @@ const init = () => {
 
   const snareFilter = audioCtx.createBiquadFilter();
   snareFilter.type = 'highpass';
-  snareFilter.frequency.value = 1500; // Measured in Hz
+  snareFilter.frequency.value = 2000; // Measured in Hz
   snareFilter.connect(primaryGainControl);
 
-  const createSnare = () => {
+  const playSnare = () => {
     const whiteNoiseSource = audioCtx.createBufferSource();
     whiteNoiseSource.buffer = buffer;
     whiteNoiseSource.connect(snareFilter);
-    return whiteNoiseSource;
+    whiteNoiseSource.start();
   };
 
+  const playKick = () => {
+      const kickOscillator = audioCtx.createOscillator();
+      kickOscillator.frequency.setValueAtTime(261.1, 0);
+      kickOscillator.connect(primaryGainControl);
+      kickOscillator.start();
+      kickOscillator.stop(audioCtx.currentTime + 0.5);
+  }
+
   const sounds = {
-    Space: () => {
-      const whiteNoiseSource = audioCtx.createBufferSource();
-      whiteNoiseSource.buffer = buffer;
-      whiteNoiseSource.connect(primaryGainControl);
-      return whiteNoiseSource;
-    },
+    Space: playKick,
     // 'KeyJ': closedHatEl,
     // 'KeyK': openHatEl,
-    KeyH: createSnare,
+    KeyH: playSnare,
   };
 
   const playSound = (event) => {
-    sounds[event.code]().start();
+    sounds[event.code]();
   };
 
   document.body.addEventListener('keydown', playSound);
