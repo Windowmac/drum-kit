@@ -3,32 +3,41 @@ const AudioContext = window.AudioContext || window.webkitAudioContext;
 
 let audioCtx;
 
-const bassDrum = () => {}
 
-const bassDrumEl = document.getElementById('bass-drum');
-const snareDrumEl = document.getElementById('snare-drum');
-const closedHatEl = document.getElementById('closed-hat'); 
-const openHatEl = document.getElementById('open-hat');
 
 const init = () => {
 
 	audioCtx = new AudioContext();
 
-	audioCtx.createMediaElementSource(bassDrumEl).connect(audioCtx.destination);
-    audioCtx.createMediaElementSource(snareDrumEl).connect(audioCtx.destination);
-    audioCtx.createMediaElementSource(closedHatEl).connect(audioCtx.destination);
-    audioCtx.createMediaElementSource(openHatEl).connect(audioCtx.destination);
+    const buffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 1, audioCtx.sampleRate);
+
+    const channelData = buffer.getChannelData(0);
+
+    for(let i = 0; i < channelData.length; i++){
+        channelData[i] = Math.random() * 2 - 1;
+    }
+
+    const primaryGainControl = audioCtx.createGain();
+    primaryGainControl.gain.setValueAtTime(0.05, 0);
+
+    primaryGainControl.connect(audioCtx.destination);
 
     const sounds = {
-        'Space': bassDrumEl,
-        'KeyJ': closedHatEl,
-        'KeyK': openHatEl,
-        'KeyH': snareDrumEl
+        'Space': function() {
+            const whiteNoiseSource = audioCtx.createBufferSource();
+            whiteNoiseSource.buffer = buffer;
+            whiteNoiseSource.connect(primaryGainControl);
+            return whiteNoiseSource;
+        },
+        // 'KeyJ': closedHatEl,
+        // 'KeyK': openHatEl,
+        // 'KeyH': snareDrumEl
     }
 
     const playSound = (event) => {
-        console.log(event.code);
-        sounds[event.code].play();
+
+        console.log(sounds[event.code]);
+        sounds[event.code]().start();
     }
 
     document.body.addEventListener('keydown', playSound);
