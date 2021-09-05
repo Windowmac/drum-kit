@@ -62,10 +62,10 @@ const init = async () => {
 
     const snareOscillator = audioCtx.createOscillator();
     snareOscillator.type = 'triangle';
-    snareOscillator.frequency.setValueAtTime(100, 0);
+    snareOscillator.frequency.setValueAtTime(180, 0);
 
     const snareOscillatorGain = audioCtx.createGain();
-    snareOscillatorGain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+    snareOscillatorGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
     snareOscillatorGain.gain.exponentialRampToValueAtTime(
       0.1,
       audioCtx.currentTime + 0.2
@@ -104,9 +104,13 @@ const init = async () => {
   };
 
   const playClosedHat = async () => {
-    document.querySelector('#closed_hat').style.background = 'white';
+    document.querySelector('#closed_hat').style.borderTop = '100px solid white';
+    document.querySelector('#closed_hat').style.borderLeft = '50px solid black';
+    document.querySelector('#closed_hat').style.borderRight = '50px solid black';
     setTimeout(() => {
-      document.querySelector('#closed_hat').style.background = 'black';
+      document.querySelector('#closed_hat').style.borderTop = '100px solid black';
+      document.querySelector('#closed_hat').style.borderLeft = '50px solid transparent';
+      document.querySelector('#closed_hat').style.borderRight = '50px solid transparent';
     }, 450);
     const closedHatSource = audioCtx.createBufferSource();
     closedHatSource.buffer = closedHatBuffer;
@@ -115,9 +119,13 @@ const init = async () => {
   };
 
   const playOpenHat = async () => {
-    document.querySelector('#open_hat').style.background = 'white';
+    document.querySelector('#open_hat').style.borderBottom = '100px solid white';
+    document.querySelector('#open_hat').style.borderLeft = '50px solid black';
+    document.querySelector('#open_hat').style.borderRight = '50px solid black';
     setTimeout(() => {
-      document.querySelector('#open_hat').style.background = 'black';
+      document.querySelector('#open_hat').style.borderBottom = '100px solid black';
+      document.querySelector('#open_hat').style.borderLeft = '50px solid transparent';
+      document.querySelector('#open_hat').style.borderRight = '50px solid transparent';
     }, 450);
     const openHatSource = audioCtx.createBufferSource();
     openHatSource.buffer = openHatBuffer;
