@@ -1,5 +1,7 @@
+
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 let audioCtx;
+
 
 const init = async () => {
   audioCtx = new AudioContext();
@@ -147,7 +149,34 @@ const init = async () => {
     sounds[event.code]();
   };
 
+  const bassDrumEl = document.createElement('div');
+  bassDrumEl.id = 'bass_drum';
+  const snareDrumEl = document.createElement('div');
+  snareDrumEl.id = 'snare_drum';
+  const closedHatEl = document.createElement('div');
+  closedHatEl.id = 'closed_hat';
+  const openHatEl = document.createElement('div');
+  openHatEl.id = 'open_hat';
+
+  document.querySelector('#center_column').appendChild(snareDrumEl);
+  document.querySelector('#center_column').appendChild(bassDrumEl);
+  document.querySelector('#center_column').appendChild(closedHatEl);
+  document.querySelector('#center_column').appendChild(openHatEl);
+  document.querySelector('#key_section').style.display = "block";
+  snareDrumEl.addEventListener('click', () => {
+    playSnare();
+  });
+  bassDrumEl.addEventListener('click', () => {
+    playKick();
+  });
+  closedHatEl.addEventListener('click', () => {
+    playClosedHat();
+  });
+  openHatEl.addEventListener('click', () => {
+    playOpenHat();
+  });
   document.body.addEventListener('keydown', playSound);
+  
 };
 
 document.querySelector('#start').addEventListener('click', () => {
@@ -163,18 +192,4 @@ document.querySelector('#start').addEventListener('click', () => {
     .querySelector('#center_column')
     .removeChild(document.querySelector('#start'));
 
-  const bassDrumEl = document.createElement('div');
-  bassDrumEl.id = 'bass_drum';
-  const snareDrumEl = document.createElement('div');
-  snareDrumEl.id = 'snare_drum';
-  const closedHatEl = document.createElement('div');
-  closedHatEl.id = 'closed_hat';
-  const openHatEl = document.createElement('div');
-  openHatEl.id = 'open_hat';
-
-  document.querySelector('#center_column').appendChild(snareDrumEl);
-  document.querySelector('#center_column').appendChild(bassDrumEl);
-  document.querySelector('#center_column').appendChild(closedHatEl);
-  document.querySelector('#center_column').appendChild(openHatEl);
-  document.querySelector('#key_section').style.display = "block";
 });
