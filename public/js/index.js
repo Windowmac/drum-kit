@@ -162,7 +162,7 @@ const init = async () => {
   document.querySelector('#center_column').appendChild(bassDrumEl);
   document.querySelector('#center_column').appendChild(closedHatEl);
   document.querySelector('#center_column').appendChild(openHatEl);
-  document.querySelector('#key_section').style.display = "block";
+  document.querySelector('#key_section').style.display = window.innerWidth > 892 ? "block" : "none";
   snareDrumEl.addEventListener('click', () => {
     playSnare();
   });
