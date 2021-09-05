@@ -2,14 +2,15 @@
   "name": "drum-kit",
   "version": "1.0.0",
   "description": "A browser window that plays drum sounds when keys are pressed.",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "express": "^4.17.1",
     "http-server": "^13.0.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
