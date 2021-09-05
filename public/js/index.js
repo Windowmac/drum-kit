@@ -154,7 +154,6 @@ document.querySelector('#start').addEventListener('click', () => {
   if (!audioCtx) {
     init();
   }
-
   // check if context is in suspended state (autoplay policy)
   if (audioCtx.state === 'suspended') {
     audioCtx.resume();
@@ -177,4 +176,5 @@ document.querySelector('#start').addEventListener('click', () => {
   document.querySelector('#center_column').appendChild(bassDrumEl);
   document.querySelector('#center_column').appendChild(closedHatEl);
   document.querySelector('#center_column').appendChild(openHatEl);
+  document.querySelector('#key_section').style.display = "block";
 });

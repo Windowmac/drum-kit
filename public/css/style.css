@@ -1,5 +1,9 @@
 #main_section {
-    padding-top: 210px;
+    padding-top: 150px;
+}
+
+#key_section {
+    display: none;
 }
 
 #bass_drum {
