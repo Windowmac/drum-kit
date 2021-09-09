@@ -176,7 +176,26 @@ const init = async () => {
     playOpenHat();
   });
   document.body.addEventListener('keydown', playSound);
-  
+
+  snareDrumEl.ontouchstart = (event) => {
+    event.preventDefault();
+    playSnare();
+  };
+
+  bassDrumEl.ontouchstart = (event) => {
+    event.preventDefault();
+    playKick();
+  };
+
+  closedHatEl.ontouchstart = (event) => {
+    event.preventDefault();
+    playClosedHat();
+  };
+
+  openHatEl.ontouchstart = (event) => {
+    event.preventDefault();
+    playOpenHat();
+  };
 };
 
 document.querySelector('#start').addEventListener('click', () => {
